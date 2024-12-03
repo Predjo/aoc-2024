@@ -45,15 +45,13 @@ function extractComplexPairs(text: string) {
   );
 }
 
-const simpleResult = extractSimplePairs(data).reduce(
-  (acc, val) => acc + val[0] * val[1],
-  0
-);
+function multiplyPairs(pairs: number[][]) {
+  return pairs.reduce((acc, val) => acc + val[0] * val[1], 0);
+}
 
-const complexResult = extractComplexPairs(data).reduce(
-  (acc, val) => acc + val[0] * val[1],
-  0
-);
+const simpleResult = multiplyPairs(extractSimplePairs(data));
+
+const complexResult = multiplyPairs(extractComplexPairs(data));
 
 console.log("Simple total result is", simpleResult);
 console.log("Complex total result is", complexResult);
