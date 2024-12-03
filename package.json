@@ -5,7 +5,8 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "day": "./start-day.sh"
+    "start:day": "./run-day.sh",
+    "create:day": "plop"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "tsx": "^4.19.2"
   },
   "devDependencies": {
-    "@types/node": "^22.10.1"
+    "@types/node": "^22.10.1",
+    "plop": "^4.0.1"
   }
 }

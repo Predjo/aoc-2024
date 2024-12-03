@@ -1,0 +1,16 @@
+import { readFileLines } from "../utils";
+
+const dataLines: string[] = [];
+
+await readFileLines(import.meta.dirname, "./input.txt", (line) => {
+  const formatLine = line.replace(/  +/g, " ");
+  dataLines.push(formatLine);
+});
+
+function calculateResult() {
+  return 1337;
+}
+
+const result = calculateResult();
+
+console.log("Total result is", result);
