@@ -50,7 +50,6 @@ function multiplyPairs(pairs: number[][]) {
 }
 
 const simpleResult = multiplyPairs(extractSimplePairs(data));
-
 const complexResult = multiplyPairs(extractComplexPairs(data));
 
 console.log("Simple total result is", simpleResult);
