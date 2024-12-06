@@ -107,7 +107,8 @@ function calculateSecondResult(map: string[][]) {
 
         do {
           const activeSymbol = getSymbol(position, activeMap);
-          // Encountering a same position and direction or a cross symbol indicates a loop
+
+          // Encountering a same position and direction indicates a loop
           if (activeSymbol === DIRECTION_SYMBOLS[directionKey]) {
             loopCount++;
             break;
