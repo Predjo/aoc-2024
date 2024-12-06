@@ -64,25 +64,28 @@ function nextMove(
 }
 
 function calculateFirstResult(map: string[][]) {
+  const activeMap = cloneMap(map);
   let position = getStartingPosition(map);
   let directionKey = 0;
   let moveCount = 1; // Start move
 
   do {
-    if (getSymbol(position, map) === ".") {
-      setSymbol(position, map, PATH_SYMBOL);
+    if (getSymbol(position, activeMap) === ".") {
+      setSymbol(position, activeMap, PATH_SYMBOL);
       moveCount++;
     }
 
     while (
-      nextMove(position, DIRECTION_LIST[directionKey], map) ===
+      nextMove(position, DIRECTION_LIST[directionKey], activeMap) ===
       OBSCURATION_SYMBOL
     ) {
       directionKey = (directionKey + 1) % 4;
     }
 
     position = move(position, DIRECTION_LIST[directionKey]);
-  } while (nextMove(position, DIRECTION_LIST[directionKey], map) !== undefined);
+  } while (
+    nextMove(position, DIRECTION_LIST[directionKey], activeMap) !== undefined
+  );
 
   moveCount++; // Exit move
 
