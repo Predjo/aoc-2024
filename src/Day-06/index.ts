@@ -10,6 +10,7 @@ const DIRECTION_LIST: [Direction, Direction][] = [
   [0, -1],
 ];
 const DIRECTION_SYMBOLS = ["↑", "→", "↓", "←"];
+const START_SYMBOL = "^";
 const CROSS_SYMBOL = "+";
 const PATH_SYMBOL = "X";
 const OBSCURATION_SYMBOL = "#";
@@ -23,7 +24,7 @@ await readFileLines(import.meta.dirname, "./input.txt", (line) => {
 function getStartingPosition(map: string[][]): [number, number] {
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
-      if (map[i][j] === "^") return [i, j];
+      if (map[i][j] === START_SYMBOL) return [i, j];
     }
   }
 
@@ -64,29 +65,27 @@ function nextMove(
 }
 
 function calculateFirstResult(map: string[][]) {
-  const activeMap = cloneMap(map);
   let position = getStartingPosition(map);
   let directionKey = 0;
   let moveCount = 1; // Start move
 
-  do {
-    if (getSymbol(position, activeMap) === ".") {
-      setSymbol(position, activeMap, PATH_SYMBOL);
+  while (nextMove(position, DIRECTION_LIST[directionKey], map) !== undefined) {
+    if (getSymbol(position, map) === ".") {
+      setSymbol(position, map, PATH_SYMBOL);
       moveCount++;
     }
 
     while (
-      nextMove(position, DIRECTION_LIST[directionKey], activeMap) ===
+      nextMove(position, DIRECTION_LIST[directionKey], map) ===
       OBSCURATION_SYMBOL
     ) {
       directionKey = (directionKey + 1) % 4;
     }
 
     position = move(position, DIRECTION_LIST[directionKey]);
-  } while (
-    nextMove(position, DIRECTION_LIST[directionKey], activeMap) !== undefined
-  );
+  }
 
+  setSymbol(position, map, PATH_SYMBOL); // Exit symbol
   moveCount++; // Exit move
 
   return moveCount;
@@ -104,7 +103,8 @@ function calculateSecondResult(map: string[][]) {
   // Loop through obstructions
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
-      if ([i, j].join() !== startPosition.join()) {
+      // Only try new obstructions on useful path
+      if ([PATH_SYMBOL].includes(getSymbol([i, j], map))) {
         const activeMap = cloneMap(map);
         activeMap[i][j] = EXTRA_OBSCURATION_SYMBOL; // Mark the obstruction
 
