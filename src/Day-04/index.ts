@@ -75,7 +75,6 @@ function countX(data: string[][]) {
 }
 
 const result = countXmas(dataLines);
-
 const resultX = countX(dataLines);
 
 console.log("Total xmas is", result);
