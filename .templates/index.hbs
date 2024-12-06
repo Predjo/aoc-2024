@@ -7,10 +7,17 @@ await readFileLines(import.meta.dirname, "./input.txt", (line) => {
   dataLines.push(formatLine);
 });
 
-function calculateResult() {
+function calculateFirstResult() {
   return 1337;
 }
 
-const result = calculateResult();
+function calculateSecondResult() {
+  return 1337;
+}
 
-console.log("Total result is", result);
+
+const firstResult = calculateFirstResult();
+const secondResult = calculateSecondResult();
+
+console.log("First result is", firstResult);
+console.log("Second result is", secondResult);

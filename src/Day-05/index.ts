@@ -19,16 +19,6 @@ await readFileLines(import.meta.dirname, "./input.txt", (line: string) => {
   }
 });
 
-const rulePredecessorRecord: Record<number, number[]> = pageRulesData.reduce(
-  (acc, val) => {
-    return {
-      ...acc,
-      [val[1]]: [...(acc[val[1]] || []), val[0]],
-    };
-  },
-  {}
-);
-
 function getLineIndexRecord(line: number[]): Record<number, number> {
   return line.reduce((acc, val, index) => ({ ...acc, [val]: index }), {});
 }
@@ -76,6 +66,16 @@ function calculateSecondResult(
   dataLines: number[][],
   ruleLines: [number, number][]
 ) {
+  const rulePredecessorRecord: Record<number, number[]> = ruleLines.reduce(
+    (acc, val) => {
+      return {
+        ...acc,
+        [val[1]]: [...(acc[val[1]] || []), val[0]],
+      };
+    },
+    {}
+  );
+
   return dataLines
     .filter((dataLine) =>
       ruleLines.some((rule) => !isValidLine(dataLine)(rule))
