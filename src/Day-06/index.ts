@@ -69,7 +69,7 @@ function calculateFirstResult(map: string[][]) {
   let directionKey = 0;
   let moveCount = 1; // Start move
 
-  while (nextMove(position, DIRECTION_LIST[directionKey], map) !== undefined) {
+  do {
     if (getSymbol(position, map) === ".") {
       setSymbol(position, map, PATH_SYMBOL);
       moveCount++;
@@ -79,11 +79,12 @@ function calculateFirstResult(map: string[][]) {
       nextMove(position, DIRECTION_LIST[directionKey], map) ===
       OBSCURATION_SYMBOL
     ) {
+      // Change direction
       directionKey = (directionKey + 1) % 4;
     }
 
     position = move(position, DIRECTION_LIST[directionKey]);
-  }
+  } while (!!nextMove(position, DIRECTION_LIST[directionKey], map));
 
   setSymbol(position, map, PATH_SYMBOL); // Exit symbol
   moveCount++; // Exit move
@@ -131,14 +132,12 @@ function calculateSecondResult(map: string[][]) {
               nextMove(position, DIRECTION_LIST[directionKey], activeMap)
             )
           ) {
+            // Change direction
             directionKey = (directionKey + 1) % 4;
           }
 
           position = move(position, DIRECTION_LIST[directionKey]);
-        } while (
-          nextMove(position, DIRECTION_LIST[directionKey], activeMap) !==
-          undefined
-        );
+        } while (!!nextMove(position, DIRECTION_LIST[directionKey], activeMap));
 
         // Reset
         position = [...startPosition] as [number, number];
