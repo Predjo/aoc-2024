@@ -28,6 +28,10 @@ function unConcatenate(result: number, operator: number) {
   return Number(result.toString().replace(new RegExp(`${operator}$`), ""));
 }
 
+/**
+ * Going backwards use recursion to validate a result using reverse operation
+ * of sum and mul with remaining operators
+ * */
 function isValidSimpleEquation(result: number, operators: number[]): boolean {
   if (operators.length < 2) return operators[0] === result;
 
@@ -47,6 +51,10 @@ function isValidSimpleEquation(result: number, operators: number[]): boolean {
   return operations.reduce((acc, op) => acc || op, false);
 }
 
+/**
+ * Going backwards use recursion to validate a result using reverse operation
+ * of sum, mul and concatenate and remaining operators
+ * */
 function isValidComplexEquation(result: number, operators: number[]): boolean {
   if (operators.length < 2) return operators[0] === result;
   if (operators.length < 3) {
