@@ -14,12 +14,6 @@ function isDivisor(a: number, b: number) {
   return a % b === 0;
 }
 
-function concatenate(...operators: number[]) {
-  return Number(
-    operators.map((o) => o.toString()).reduce((acc, val) => acc + val, "")
-  );
-}
-
 function isConcatenated(result: number, operator: number) {
   return new RegExp(`${operator}$`).test(result.toString());
 }
