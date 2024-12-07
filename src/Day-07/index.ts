@@ -57,12 +57,6 @@ function isValidSimpleEquation(result: number, operators: number[]): boolean {
  * */
 function isValidComplexEquation(result: number, operators: number[]): boolean {
   if (operators.length < 2) return operators[0] === result;
-  if (operators.length < 3) {
-    return (
-      isValidSimpleEquation(result, operators) ||
-      concatenate(...operators) === result
-    );
-  }
 
   const activeOperator = operators.at(-1);
   const remainingOperators = operators.slice(0, -1);
