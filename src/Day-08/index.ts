@@ -1,7 +1,7 @@
 import { readFileLines, cloneMatrix } from "../utils";
 
 const dataLines: string[][] = [];
-const ANTINODE_NODE_KEY = "#";
+const ANTINODE_KEY = "#";
 
 type Node = [number, number];
 
@@ -89,11 +89,11 @@ function calculateFirstResult(map: string[][]) {
 
           [topAntinode, bottomAntinode].forEach((node) => {
             if (
-              ![ANTINODE_NODE_KEY, undefined].includes(
+              ![ANTINODE_KEY, undefined].includes(
                 activeMap[node.at(0)]?.[node.at(1)]
               )
             ) {
-              activeMap[node.at(0)][node.at(1)] = ANTINODE_NODE_KEY;
+              activeMap[node.at(0)][node.at(1)] = ANTINODE_KEY;
               antinodeCount++;
             }
           });
@@ -126,8 +126,8 @@ function calculateSecondResult(map: string[][]) {
           const bottomAntinodeList = calcFunc(1);
 
           [...topAntinodeList, ...bottomAntinodeList].forEach((node) => {
-            if (activeMap[node.at(0)][node.at(1)] !== ANTINODE_NODE_KEY) {
-              activeMap[node.at(0)][node.at(1)] = ANTINODE_NODE_KEY;
+            if (activeMap[node.at(0)][node.at(1)] !== ANTINODE_KEY) {
+              activeMap[node.at(0)][node.at(1)] = ANTINODE_KEY;
               antinodeCount++;
             }
           });
