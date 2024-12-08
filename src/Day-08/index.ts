@@ -121,9 +121,9 @@ function calculateSecondResult(map: string[][]) {
         .slice(activeIndex + 1)
         .forEach((compareNode) => {
           const nodeDiff = getNodeDiff(activeNode, compareNode);
-          const contFunc = calcNodeList(activeNode, nodeDiff, map.length - 1);
-          const topAntinodeList = contFunc(-1);
-          const bottomAntinodeList = contFunc(1);
+          const calcFunc = calcNodeList(activeNode, nodeDiff, map.length - 1);
+          const topAntinodeList = calcFunc(-1);
+          const bottomAntinodeList = calcFunc(1);
 
           [...topAntinodeList, ...bottomAntinodeList].forEach((node) => {
             if (activeMap[node.at(0)][node.at(1)] !== ANTINODE_NODE_KEY) {
