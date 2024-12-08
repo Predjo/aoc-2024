@@ -18,3 +18,9 @@ export async function readFileLines(
     lineProcessor(line);
   }
 }
+
+export function cloneMatrix(map: string[][]): string[][] {
+  return map.map((arr) => {
+    return arr.slice();
+  });
+}

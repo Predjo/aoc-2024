@@ -1,4 +1,4 @@
-import { readFileLines } from "../utils";
+import { readFileLines, cloneMatrix } from "../utils";
 
 const dataLines: string[][] = [];
 
@@ -29,12 +29,6 @@ function getStartingPosition(map: string[][]): [number, number] {
   }
 
   return undefined;
-}
-
-function cloneMap(map: string[][]): string[][] {
-  return map.map((arr) => {
-    return arr.slice();
-  });
 }
 
 function move(position: [number, number], direction: [Direction, Direction]) {
@@ -106,7 +100,7 @@ function calculateSecondResult(map: string[][]) {
     for (let j = 0; j < map[i].length; j++) {
       // Only try new obstructions on useful path
       if ([PATH_SYMBOL].includes(getSymbol([i, j], map))) {
-        const activeMap = cloneMap(map);
+        const activeMap = cloneMatrix(map);
         activeMap[i][j] = EXTRA_OBSCURATION_SYMBOL; // Mark the obstruction
 
         do {
