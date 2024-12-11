@@ -1,14 +1,8 @@
 import { readFileLines, cloneMatrix } from "../utils";
+import { Direction, DIRECTION_LIST } from "../constants";
 
 const dataLines: string[][] = [];
 
-type Direction = -1 | 0 | 1;
-const DIRECTION_LIST: [Direction, Direction][] = [
-  [-1, 0],
-  [0, 1],
-  [1, 0],
-  [0, -1],
-];
 const DIRECTION_SYMBOLS = ["↑", "→", "↓", "←"];
 const START_SYMBOL = "^";
 const CROSS_SYMBOL = "+";

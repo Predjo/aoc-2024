@@ -2,6 +2,11 @@ import fs from "fs";
 import path from "path";
 import readline from "readline";
 
+export type Node = [number, number];
+export type Matrix<T> = T[][];
+export type NumberMatrix = Matrix<number>;
+export type StringMatrix = Matrix<string>;
+
 export async function readFileLines(
   dirname: string,
   filePath: string,

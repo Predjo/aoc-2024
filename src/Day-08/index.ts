@@ -1,9 +1,7 @@
-import { readFileLines, cloneMatrix } from "../utils";
+import { Node, readFileLines, cloneMatrix } from "../utils";
 
 const dataLines: string[][] = [];
 const ANTINODE_KEY = "#";
-
-type Node = [number, number];
 
 await readFileLines(import.meta.dirname, "./input.txt", (line) => {
   const formatLine = line.replace(/  +/g, " ").split("");
