@@ -1,11 +1,7 @@
 import fs from "fs";
 import path from "path";
 import readline from "readline";
-
-export type Node = [number, number];
-export type Matrix<T> = T[][];
-export type NumberMatrix = Matrix<number>;
-export type StringMatrix = Matrix<string>;
+import type { Matrix } from "./types";
 
 export async function readFileLines(
   dirname: string,
@@ -24,8 +20,12 @@ export async function readFileLines(
   }
 }
 
-export function cloneMatrix<T>(map: T[][]): T[][] {
+export function cloneMatrix<T>(map: Matrix<T>): Matrix<T> {
   return map.map((arr) => {
     return arr.slice();
   });
+}
+
+export function* range(to: number, from: number = 0) {
+  while (from < to) yield from++;
 }
