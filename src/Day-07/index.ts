@@ -1,6 +1,7 @@
 import { readFileLines } from "../utils";
+import type { NumberMatrix } from "../types";
 
-const dataLines: number[][] = [];
+const dataLines: NumberMatrix = [];
 
 await readFileLines(import.meta.dirname, "./input.txt", (line) => {
   const result = line.split(":");
@@ -75,7 +76,7 @@ function isValidComplexEquation(result: number, operators: number[]): boolean {
   return operations.reduce((acc, op) => acc || op, false);
 }
 
-function calculateFirstResult(dataLines: number[][]) {
+function calculateFirstResult(dataLines: NumberMatrix) {
   return dataLines
     .filter(([result, ...operators]) =>
       isValidSimpleEquation(result, operators)
@@ -83,7 +84,7 @@ function calculateFirstResult(dataLines: number[][]) {
     .reduce((sum, [value]) => sum + value, 0);
 }
 
-function calculateSecondResult(dataLines: number[][]) {
+function calculateSecondResult(dataLines: NumberMatrix) {
   return dataLines
     .filter(([result, ...operators]) =>
       isValidComplexEquation(result, operators)

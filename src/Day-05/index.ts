@@ -1,7 +1,8 @@
 import { readFileLines } from "../utils";
+import type { NumberMatrix, Node } from "../types";
 
-const pageRulesData: [number, number][] = [];
-const pageUpdatesData: number[][] = [];
+const pageRulesData: Node[] = [];
+const pageUpdatesData: NumberMatrix = [];
 
 let rulesFlag = true;
 
@@ -51,10 +52,7 @@ function getMiddleValue(dataLine: number[]) {
   return dataLine[Math.floor(dataLine.length / 2)];
 }
 
-function calculateFirstResult(
-  dataLines: number[][],
-  ruleLines: [number, number][]
-) {
+function calculateFirstResult(dataLines: NumberMatrix, ruleLines: Node[]) {
   return dataLines
     .filter((dataLine) =>
       ruleLines.every((rule) => isValidLine(dataLine)(rule))
@@ -62,10 +60,7 @@ function calculateFirstResult(
     .reduce((acc, val) => acc + getMiddleValue(val), 0);
 }
 
-function calculateSecondResult(
-  dataLines: number[][],
-  ruleLines: [number, number][]
-) {
+function calculateSecondResult(dataLines: NumberMatrix, ruleLines: Node[]) {
   const rulePredecessorRecord: Record<number, number[]> = ruleLines.reduce(
     (acc, val) => {
       return {

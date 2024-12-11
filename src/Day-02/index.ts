@@ -1,6 +1,7 @@
 import { readFileLines } from "../utils";
+import type { NumberMatrix } from "../types";
 
-const data: number[][] = [];
+const data: NumberMatrix = [];
 
 await readFileLines(import.meta.dirname, "./input.txt", (line) => {
   const splitLine = line.replace(/  +/g, " ").split(" ");

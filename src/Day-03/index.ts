@@ -1,4 +1,5 @@
 import { readFileLines } from "../utils";
+import type { NumberMatrix } from "../types";
 
 const dataLines: string[] = [];
 
@@ -45,7 +46,7 @@ function extractComplexPairs(text: string) {
   );
 }
 
-function multiplyPairs(pairs: number[][]) {
+function multiplyPairs(pairs: NumberMatrix) {
   return pairs.reduce((acc, val) => acc + val[0] * val[1], 0);
 }
 

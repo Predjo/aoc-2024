@@ -1,7 +1,8 @@
 import { readFileLines, cloneMatrix } from "../utils";
-import { Direction, DIRECTION_LIST } from "../constants";
+import { DIRECTION_LIST } from "../constants";
+import type { Direction, Node, StringMatrix } from "../types";
 
-const dataLines: string[][] = [];
+const dataLines: StringMatrix = [];
 
 const DIRECTION_SYMBOLS = ["↑", "→", "↓", "←"];
 const START_SYMBOL = "^";
@@ -15,7 +16,7 @@ await readFileLines(import.meta.dirname, "./input.txt", (line) => {
   dataLines.push(formatLine);
 });
 
-function getStartingPosition(map: string[][]): [number, number] {
+function getStartingPosition(map: StringMatrix): Node {
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
       if (map[i][j] === START_SYMBOL) return [i, j];
@@ -25,34 +26,30 @@ function getStartingPosition(map: string[][]): [number, number] {
   return undefined;
 }
 
-function move(position: [number, number], direction: [Direction, Direction]) {
+function move(position: Node, direction: [Direction, Direction]) {
   return [position[0] + direction[0], position[1] + direction[1]] as [
     number,
     number
   ];
 }
 
-function getSymbol(position: [number, number], map: string[][]) {
+function getSymbol(position: Node, map: StringMatrix) {
   return map[position[0]]?.[position[1]];
 }
 
-function setSymbol(
-  position: [number, number],
-  map: string[][],
-  symbol: string
-) {
+function setSymbol(position: Node, map: StringMatrix, symbol: string) {
   map[position[0]][position[1]] = symbol;
 }
 
 function nextMove(
-  position: [number, number],
+  position: Node,
   direction: [Direction, Direction],
-  map: string[][]
+  map: StringMatrix
 ) {
   return getSymbol(move(position, direction), map);
 }
 
-function calculateFirstResult(map: string[][]) {
+function calculateFirstResult(map: StringMatrix) {
   let position = getStartingPosition(map);
   let directionKey = 0;
   let moveCount = 1; // Start move
@@ -80,11 +77,11 @@ function calculateFirstResult(map: string[][]) {
   return moveCount;
 }
 
-function calculateSecondResult(map: string[][]) {
+function calculateSecondResult(map: StringMatrix) {
   const startPosition = getStartingPosition(map);
   const startDirection = 0;
 
-  let position = [...startPosition] as [number, number];
+  let position = [...startPosition] as Node;
   let directionKey = startDirection;
 
   let loopCount = 0;
@@ -128,7 +125,7 @@ function calculateSecondResult(map: string[][]) {
         } while (!!nextMove(position, DIRECTION_LIST[directionKey], activeMap));
 
         // Reset
-        position = [...startPosition] as [number, number];
+        position = [...startPosition] as Node;
         directionKey = startDirection;
       }
     }

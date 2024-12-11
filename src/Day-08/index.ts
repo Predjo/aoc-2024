@@ -1,6 +1,7 @@
-import { Node, readFileLines, cloneMatrix } from "../utils";
+import { readFileLines, cloneMatrix } from "../utils";
+import type { Node, StringMatrix } from "../types";
 
-const dataLines: string[][] = [];
+const dataLines: StringMatrix = [];
 const ANTINODE_KEY = "#";
 
 await readFileLines(import.meta.dirname, "./input.txt", (line) => {
@@ -9,7 +10,7 @@ await readFileLines(import.meta.dirname, "./input.txt", (line) => {
 });
 
 /** Record where keys are antenna symbols and entries are a list of nodes */
-function getNodeCoordinateRecord(map: string[][]): Record<string, Node[]> {
+function getNodeCoordinateRecord(map: StringMatrix): Record<string, Node[]> {
   return map.reduce(
     (acc, line, lineIndex) => ({
       ...acc,
@@ -70,7 +71,7 @@ function calcNodeList(
  * calculate possible anti nodes locations while marking
  * the anti node location on a cloned map to avoid duplicates
  */
-function calculateFirstResult(map: string[][]) {
+function calculateFirstResult(map: StringMatrix) {
   const activeMap = cloneMatrix(map);
   const coordinateRecord = getNodeCoordinateRecord(activeMap);
   const antennas = Object.keys(coordinateRecord);
@@ -107,7 +108,7 @@ function calculateFirstResult(map: string[][]) {
  * calculate possible anti nodes locations and their harmonics while marking
  * the anti node location on a cloned map to avoid duplicates
  */
-function calculateSecondResult(map: string[][]) {
+function calculateSecondResult(map: StringMatrix) {
   const activeMap = cloneMatrix(map);
   const coordinateRecord = getNodeCoordinateRecord(activeMap);
   const antennas = Object.keys(coordinateRecord);

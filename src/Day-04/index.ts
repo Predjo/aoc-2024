@@ -1,6 +1,7 @@
 import { readFileLines } from "../utils";
+import type { StringMatrix } from "../types";
 
-const dataLines: string[][] = [];
+const dataLines: StringMatrix = [];
 
 const XMAS = "XMAS";
 const MAS = "MAS";
@@ -13,7 +14,7 @@ await readFileLines(import.meta.dirname, "./input.txt", (line) => {
 type Direction = -1 | 0 | 1;
 
 function getMatrixSlice(
-  data: string[][],
+  data: StringMatrix,
   verticalIndex: number = 0,
   verticalDirection: Direction = 1,
   horizontalIndex: number = 0,
@@ -33,7 +34,7 @@ function getMatrixSlice(
 }
 
 const XMAS_CODES = [XMAS, XMAS.split("").reverse().join("")];
-function countXmas(data: string[][]) {
+function countXmas(data: StringMatrix) {
   let count = 0;
   for (let i = 0; i < data.length; i++) {
     for (let j = 0; j < data[i].length; j++) {
@@ -55,7 +56,7 @@ function countXmas(data: string[][]) {
 }
 
 const MAS_CODES = [MAS, MAS.split("").reverse().join("")];
-function countX(data: string[][]) {
+function countX(data: StringMatrix) {
   let count = 0;
   for (let i = 0; i < data.length; i++) {
     for (let j = 0; j < data[i].length; j++) {

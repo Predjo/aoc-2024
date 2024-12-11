@@ -1,5 +1,6 @@
-import { Node, NumberMatrix, readFileLines } from "../utils";
+import { readFileLines } from "../utils";
 import { DIRECTION_LIST } from "../constants";
+import type { Node, NumberMatrix } from "../types";
 
 const dataLines: NumberMatrix = [];
 
