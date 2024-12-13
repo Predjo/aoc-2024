@@ -20,12 +20,16 @@ export async function readFileLines(
   }
 }
 
-export function cloneMatrix<T>(map: Matrix<T>): Matrix<T> {
+export function cloneMatrix<T, F = T>(map: Matrix<T>, fill?: F): Matrix<F> {
   return map.map((arr) => {
-    return arr.slice();
+    return fill !== undefined ? Array(arr.length).fill(fill) : arr.slice();
   });
 }
 
 export function* range(to: number, from: number = 0) {
   while (from < to) yield from++;
+}
+
+export function allEqual<T>(list: T[]): boolean {
+  return list.every((v) => v === list[0]);
 }

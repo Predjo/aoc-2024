@@ -21,5 +21,6 @@
 
     // Disallow features that require cross-file awareness
     "isolatedModules": true
-  }
+  },
+  "exclude": ["plopfile.js"]
 }
