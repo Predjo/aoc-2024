@@ -3,6 +3,16 @@ import path from "path";
 import readline from "readline";
 import type { Matrix } from "./types";
 
+export async function readFile(
+  dirname: string,
+  filePath: string,
+  fileProcessor: (file: string) => void
+) {
+  const realPath = path.join(dirname, filePath);
+  const file = fs.readFileSync(realPath, "utf8");
+  fileProcessor(file);
+}
+
 export async function readFileLines(
   dirname: string,
   filePath: string,
