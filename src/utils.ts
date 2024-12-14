@@ -30,16 +30,28 @@ export async function readFileLines(
   }
 }
 
+export function* range(to: number, from: number = 0) {
+  while (from < to) yield from++;
+}
+
 export function cloneMatrix<T, F = T>(map: Matrix<T>, fill?: F): Matrix<F> {
   return map.map((arr) => {
     return fill !== undefined ? Array(arr.length).fill(fill) : arr.slice();
   });
 }
 
-export function* range(to: number, from: number = 0) {
-  while (from < to) yield from++;
+export function createMatrix<T>(
+  height: number,
+  width: number,
+  fill?: T
+): Matrix<T> {
+  return Array.from(range(height)).map(() => Array(width).fill(fill));
 }
 
 export function allEqual<T>(list: T[]): boolean {
   return list.every((v) => v === list[0]);
+}
+
+export function mod(a: number, b: number): number {
+  return ((a % b) + b) % b;
 }
