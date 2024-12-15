@@ -52,10 +52,10 @@ function getBoxesInWay(
   boxList: Box[]
 ): Box[] {
   return boxList.filter(
-    (b) =>
-      !(b.p[0] === x && b.p[1] === y) &&
-      b.p[0] === x + i &&
-      !!intersection([b.p[1], b.p[1] + b.w], [y + j, y + j + w]).length
+    ({ p: [bX, bY], w: bW }) =>
+      !(bX === x && bY === y) &&
+      bX === x + i &&
+      !!intersection([bY, bY + bW], [y + j, y + j + w]).length
   );
 }
 
@@ -95,10 +95,8 @@ function moveRobot(
   boxList: Box[]
 ): Node {
   const [nX, nY] = [x + i, y + j];
-
   const boxesInWay = getBoxesInWay([x, y], 0, [i, j], boxList);
   boxesInWay.forEach((b) => moveBoxes(b, [i, j], boxList));
-
   return [nX, nY];
 }
 
