@@ -1,4 +1,4 @@
-import { readFileLines, cloneMatrix } from "../utils";
+import { readFileLines, cloneMatrix, getSymbolNode } from "../utils";
 import { DIRECTION_LIST } from "../constants";
 import type { Direction, Node, StringMatrix } from "../types";
 
@@ -15,16 +15,6 @@ await readFileLines(import.meta.dirname, "./input.txt", (line) => {
   const formatLine = line.replace(/  +/g, " ").split("");
   dataLines.push(formatLine);
 });
-
-function getStartingPosition(map: StringMatrix): Node {
-  for (let i = 0; i < map.length; i++) {
-    for (let j = 0; j < map[i].length; j++) {
-      if (map[i][j] === START_SYMBOL) return [i, j];
-    }
-  }
-
-  return undefined;
-}
 
 function move(position: Node, direction: [Direction, Direction]) {
   return [position[0] + direction[0], position[1] + direction[1]] as [
@@ -50,7 +40,7 @@ function nextMove(
 }
 
 function calculateFirstResult(map: StringMatrix) {
-  let position = getStartingPosition(map);
+  let position = getSymbolNode(map, START_SYMBOL);
   let directionKey = 0;
   let moveCount = 1; // Start move
 
@@ -78,7 +68,7 @@ function calculateFirstResult(map: StringMatrix) {
 }
 
 function calculateSecondResult(map: StringMatrix) {
-  const startPosition = getStartingPosition(map);
+  const startPosition = getSymbolNode(map, START_SYMBOL);
   const startDirection = 0;
 
   let position = [...startPosition] as Node;

@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import readline from "readline";
-import type { Matrix } from "./types";
+import type { Matrix, StringMatrix, Node } from "./types";
 
 export async function readFile(
   dirname: string,
@@ -54,4 +54,18 @@ export function allEqual<T>(list: T[]): boolean {
 
 export function mod(a: number, b: number): number {
   return ((a % b) + b) % b;
+}
+
+export function getSymbolNode(map: StringMatrix, symbol: string): Node {
+  for (let i = 0; i < map.length; i++) {
+    for (let j = 0; j < map[i].length; j++) {
+      if (map[i][j] === symbol) return [i, j];
+    }
+  }
+
+  return undefined;
+}
+
+export function intersection<T>(arrA: T[], arrB: T[]): T[] {
+  return arrA.filter((x) => arrB.includes(x));
 }
